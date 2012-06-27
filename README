@@ -9,6 +9,12 @@ o===============================================================================
 	o-> master
 		|
 		o-> development
+		|		|
+		|		o-> logging
+		|		|
+		|		o-> payex
+		|		|
+		|		o-> configuration
 		|
 		o-> documentation
 
@@ -20,6 +26,15 @@ o===============================================================================
 
 : development
   this is where the development occurs, mostly pulls from branches below
+
+: logging
+  changes to the logging system through all source code of the project
+
+: payex
+  API for the PayEx payment service
+
+: configuration
+  code that enables making and handling of configuration files
 
 : documentation
   used to document the source code
