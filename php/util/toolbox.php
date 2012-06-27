@@ -1,7 +1,7 @@
 <?php
 	class toolbox {
-        public static function randBool() { return((mt_rand(0, 1) == 1) ? true : false); }
-        
+		public static function randBool() { return((mt_rand(0, 1) == 1) ? true : false); }
+		
 		public static function randChr($letter = true, $capital = false) {
 			$chr = NULL;
 			
@@ -10,7 +10,7 @@
 			
 			return($chr);
 		}
-        
+		
 		public static function randStr($length = 6, $numbers = true, $letters = true, $capitals = true, $capitalsOnly = false) {
 			$str = NULL;
 			

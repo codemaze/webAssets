@@ -1,7 +1,7 @@
 <?php
 	class session {
 		private $idleMax;
-        private $logger;
+		private $logger;
 		private $loginQuery;
 		private $mysql;
 		private $name;
@@ -9,8 +9,8 @@
 		
 		public function session($name = NULL, $mysql = NULL, $loginQuery = NULL, $logger = NULL, $idleMax = 0) {
 			$this->idleMax($idleMax);
-            $this->logger($logger);
-            $this->loginQuery($loginQuery);
+			$this->logger($logger);
+			$this->loginQuery($loginQuery);
 			$this->mysql($mysql);
 			$this->name($name);
 			$this->start();
@@ -30,8 +30,8 @@
 		}
 		
 		public function idleMax($min = NULL) { return($this->idleMax = (is_int($min)) ? $min : $this->idleMax); }
-        public function logger($logger = NULL) { return($this->logger = (is_a($logger, "logger")) ? $logger : $this->logger); }
-        public function loginQuery($loginQuery = NULL) {  return($this->loginQuery = (is_string($loginQuery)) ? $loginQuery : $this->loginQuery); }
+		public function logger($logger = NULL) { return($this->logger = (is_a($logger, "logger")) ? $logger : $this->logger); }
+		public function loginQuery($loginQuery = NULL) {  return($this->loginQuery = (is_string($loginQuery)) ? $loginQuery : $this->loginQuery); }
 		public function mysql($mysql = NULL) { return($this->mysql = (is_a($mysql, "mysql")) ? $mysql : $this->mysql); }
 		
 		public function name($name = NULL) {
@@ -59,21 +59,21 @@
 			return(session_destroy());
 		}
 		
-        public function user($uname = NULL, $pword = NULL) {
-            $success = false;
-            
-            if (!empty($uname) && !empty($pword) && is_a($this->mysql, "mysql")) {
-                $query = $this->mysql->query(sprintf($this->loginQuery, @mysql_real_escape_string($uname), @mysql_real_escape_string($pword)));
-                
-                if (!empty($query['records'])) {
-                    $this->user = $_SESSION['user'] = $query['records'][0];
-                    $success = true;
-                }
-            } else if (!empty($this->user)) $success = true;
+		public function user($uname = NULL, $pword = NULL) {
+			$success = false;
+			
+			if (!empty($uname) && !empty($pword) && is_a($this->mysql, "mysql")) {
+				$query = $this->mysql->query(sprintf($this->loginQuery, @mysql_real_escape_string($uname), @mysql_real_escape_string($pword)));
+				
+				if (!empty($query['records'])) {
+					$this->user = $_SESSION['user'] = $query['records'][0];
+					$success = true;
+				}
+			} else if (!empty($this->user)) $success = true;
 			
 			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg("SESSION: ".$uname." successfully logged in to the system", LOGLEVEL_NOTICE);
-            
-            return($success);
-        }
+			
+			return($success);
+		}
 	}
 ?>

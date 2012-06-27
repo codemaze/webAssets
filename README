@@ -9,12 +9,12 @@ o===============================================================================
 	o-> master
 		|
 		o-> development
-		|		|
-		|		o-> logging
-		|		|
-		|		o-> payex
-		|		|
-		|		o-> configuration
+		|	|
+		|	o-> logging
+		|	|
+		|	o-> payex
+		|	|
+		|	o-> configuration
 		|
 		o-> documentation
 
