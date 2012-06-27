@@ -1,5 +1,6 @@
 <?php
 	class session {
+		private $module = "SESSION";
 		private $idleMax;
 		private $logger;
 		private $loginQuery;
@@ -71,7 +72,7 @@
 				}
 			} else if (!empty($this->user)) $success = true;
 			
-			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg("SESSION: ".$uname." successfully logged in to the system", LOGLEVEL_NOTICE);
+			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg($uname." successfully logged in to the system", LOGLEVEL_NOTICE, $this->module);
 			
 			return($success);
 		}

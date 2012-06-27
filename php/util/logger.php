@@ -5,7 +5,7 @@
 	define("LOGLEVEL_ERROR", 3);
 	
 	class logger {
-		private $fields = array("time", "level", "msg");
+		private $fields = array("time", "module", "level", "msg");
 		private $loglevels = array("INFO" => LOGLEVEL_INFO, "NOTICE" => LOGLEVEL_NOTICE, "WARNING" => LOGLEVEL_WARNING, "ERROR" => LOGLEVEL_ERROR);
 		private $level;
 		private $mysqlTable;
@@ -44,6 +44,7 @@
 					foreach ($this->fields as $field) {
 						switch ($field) {
 							case "time": $fields .= "`time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,"; break;
+							case "module": $fields .= "`module` varchar(20) DEFAULT 'SYSTEM',"; break;
 							case "level": $fields .= "`level` enum(".$levels.") DEFAULT '".reset($set)."',"; break;
 							case "msg": $fields .= "`msg` text,"; break;
 						}
@@ -57,32 +58,43 @@
 			return($this->mysqlTable);
 		}
 		
-		public function msg($msg, $level = NULL) {
+		public function msg($msg, $level = NULL, $module = NULL) {
 			$level = ($this->isLogLevel($level)) ? $level : $this->level();
+			$module = (!empty($module)) ? strtoupper($module) : NULL;
 			
 			if ($level >= $this->level()) {
 				$level = ($l = array_search($level, $this->loglevels)) ? $l : key($this->loglevels);
 				
-				if (is_string($this->mysqlTable)) $this->msgMysqlTable($msg, $level);
-				else $this->msgFile($msg, $level);
+				if (is_string($this->mysqlTable)) $this->msgMysqlTable($msg, $level, $module);
+				else $this->msgFile($msg, $level, $module);
 			}
 		}
 		
-		private function msgMysqlTable($msg, $level) {
+		private function msgMysqlTable($msg, $level, $module) {
 			$msg = mysql_real_escape_string($msg, $this->output->connection());
 			$fields = NULL;
 			$values = NULL;
 			
-			if (in_array("level", $this->fields)) {
-				$fields .= "`level`"; $values .= "'".$level."'";
+			for ($i = 1; $i <= count($this->fields); $i++) {
+				$field =$this->fields[($i - 1)];
 				
-				if (in_array("msg", $this->fields)) { $fields .= ",`msg`"; $values .= ",'".$msg."'"; }
-			} else if (in_array("msg", $this->fields)) { $fields .= "`msg`"; $values .= "'".$msg."'"; }
+				if ($field != "time") {
+					$comma = ($i != count($this->fields)) ? ',' : NULL;
+					
+					switch ($field) {
+						case "module": $values .= "'".$module."'".$comma; break;
+						case "level": $values .= "'".$level."'".$comma; break;
+						case "msg": $values .= "'".$msg."'".$comma; break;
+					}
+					
+					$fields .= '`'.$field.'`'.$comma;
+				}
+			}
 			
 			if (!empty($fields)) $this->output->query("INSERT INTO `".$this->mysqlTable."` (".$fields.") VALUES (".$values.");", false);
 		}
 		
-		private function msgFile($msg, $level) {
+		private function msgFile($msg, $level, $module) {
 			$filename = (is_string($this->output)) ? $this->output : strtoupper(date("My")).".log";
 			$fields = NULL;
 			$header = NULL;
