@@ -6,10 +6,8 @@
 	$mysql_log = new mysql("localhost", "root", "1234", "logs");
 	$mysql = new mysql("localhost", "root", "1234", "test");
 	
-	$logger = new logger($mysql_log, LOGLEVEL_INFO, strtoupper(date("My")));
-	$session = new session("test", $mysql, "SELECT * FROM `accounts` WHERE `uname` = '%s' AND `pword` = '%s'");
-	
-	$session->logger($logger);
+	$log = new logger($mysql_log, LOGLEVEL_INFO, strtoupper(date("My")));
+	$session = new session("test", $mysql, "SELECT * FROM `accounts` WHERE `uname` = '%s' AND `pword` = '%s'", $log);
 	
 	if ($session->user()) echo("Welcome, ".$session->getUserProperty("uname")."!");
 	else if (isset($_GET['uname']) && isset($_GET['pword']) && $session->user($_GET['uname'], $_GET['pword'])) header("Location: session001.php");

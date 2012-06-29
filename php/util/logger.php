@@ -1,12 +1,13 @@
 <?php
-	define("LOGLEVEL_INFO", 0);
-	define("LOGLEVEL_NOTICE", 1);
-	define("LOGLEVEL_WARNING", 2);
-	define("LOGLEVEL_ERROR", 3);
+	define("LOGLEVEL_DEBUG", 0);
+	define("LOGLEVEL_INFO", 1);
+	define("LOGLEVEL_NOTICE", 2);
+	define("LOGLEVEL_WARNING", 3);
+	define("LOGLEVEL_ERROR", 4);
 	
 	class logger {
 		private $fields = array("time", "module", "level", "msg");
-		private $loglevels = array("INFO" => LOGLEVEL_INFO, "NOTICE" => LOGLEVEL_NOTICE, "WARNING" => LOGLEVEL_WARNING, "ERROR" => LOGLEVEL_ERROR);
+		private $loglevels = array("DEBUG" => LOGLEVEL_DEBUG, "INFO" => LOGLEVEL_INFO, "NOTICE" => LOGLEVEL_NOTICE, "WARNING" => LOGLEVEL_WARNING, "ERROR" => LOGLEVEL_ERROR);
 		private $level;
 		private $mysqlTable;
 		private $output;

@@ -72,7 +72,7 @@
 				}
 			} else if (!empty($this->user)) $success = true;
 			
-			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg($uname." successfully logged in to the system", LOGLEVEL_NOTICE, $this->module);
+			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg("'".$uname."' successfully logged in to the system", LOGLEVEL_NOTICE, $this->module);
 			
 			return($success);
 		}
