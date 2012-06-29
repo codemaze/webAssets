@@ -27,5 +27,5 @@
 	else echo($query['error']."<br />");
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 	
-	echo("Source code comparison between webAssets- and PHP MySQL API");
+	echo("<br />Source code comparison between webAssets- and PHP MySQL API");
 ?>

@@ -1,5 +1,5 @@
 <?php
-	include("../php/misc/image.php");
+	include("../php/util/image.php");
 	
 	$image = new image("image001.jpg");
 	
