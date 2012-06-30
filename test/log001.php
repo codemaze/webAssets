@@ -1,9 +1,9 @@
 <?php
 	include("../php/util/logger.php");
 	
-	$logger = new logger();
+	$log = new logger();
 	
-	$logger->msg("Testing logging to file (backup)");
+	$log->msg("Testing logging to file (backup)");
 	
 	echo("Testing logging to file (backup)");
 ?>
