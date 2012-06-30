@@ -1,6 +1,7 @@
 <?php
 	class mysql {
-		private $module = "MYSQL";
+		public static $className = __CLASS__;
+		
 		private $AFR;
 		private $charset;
 		private $connection;
@@ -84,8 +85,8 @@
 			} else $this->errors[] = $array['error'] = "No valid connection";
 			
 			if (is_a($this->logger, "logger")) {
-				if (!empty($array['error'])) $this->logger->msg($array['error'], LOGLEVEL_ERROR, $this->module);
-				if ($array['resource'] && $log) $this->logger->msg($query, LOGLEVEL_INFO, $this->module);
+				if (!empty($array['error'])) $this->logger->msg($array['error'], LOGLEVEL_ERROR, mysql::$className);
+				if ($array['resource'] && $log) $this->logger->msg($query, LOGLEVEL_INFO, mysql::$className);
 			}
 			
 			return($array);
@@ -93,4 +94,8 @@
 		
 		public function timestamp($timestamp = NULL) { return($this->timestamp = (is_a($timestamp, "timestamp")) ? $timestamp : $this->timestamp); }
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == mysql::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>

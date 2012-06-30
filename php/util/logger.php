@@ -6,6 +6,8 @@
 	define("LOGLEVEL_ERROR", 4);
 	
 	class logger {
+		public static $className = __CLASS__;
+		
 		private $fields = array("time", "module", "level", "msg");
 		private $loglevels = array("DEBUG" => LOGLEVEL_DEBUG, "INFO" => LOGLEVEL_INFO, "NOTICE" => LOGLEVEL_NOTICE, "WARNING" => LOGLEVEL_WARNING, "ERROR" => LOGLEVEL_ERROR);
 		private $level;
@@ -118,4 +120,8 @@
 		
 		public function output($output = NULL) { return($this->output = (!empty($output)) ? $output : $this->output); }
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == logger::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>

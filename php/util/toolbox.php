@@ -1,5 +1,7 @@
 <?php
 	class toolbox {
+		public static $className = __CLASS__;
+		
 		public static function randBool() { return((mt_rand(0, 1) == 1) ? true : false); }
 		
 		public static function randChr($letter = true, $capital = false) {
@@ -71,4 +73,8 @@
 			return($new_url);
 		}
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == toolbox::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>

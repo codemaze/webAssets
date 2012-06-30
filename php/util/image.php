@@ -1,5 +1,7 @@
 <?php
 	class image {
+		public static $className = __CLASS__;
+		
 		private $data;
 		private $type;
 		private $x;
@@ -73,4 +75,8 @@
 		public function x($image = NULL) { return((is_resource($image)) ? imagesx($image) : $this->x); }
 		public function y($image = NULL) { return((is_resource($image)) ? imagesy($image) : $this->y); }
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == image::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>

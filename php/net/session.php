@@ -1,6 +1,7 @@
 <?php
 	class session {
-		private $module = "SESSION";
+		public static $className = __CLASS__;
+		
 		private $idleMax;
 		private $logger;
 		private $loginQuery;
@@ -72,9 +73,13 @@
 				}
 			} else if (!empty($this->user)) $success = true;
 			
-			if (!empty($uname) && $success && is_a($this->logger, "logger")) $this->logger->msg("'".$uname."' successfully logged in to the system", LOGLEVEL_NOTICE, $this->module);
+			if (!empty($uname) && $success && is_a($this->logger, logger::$className)) $this->logger->msg("'".$uname."' successfully logged in to the system", LOGLEVEL_NOTICE, session::$className);
 			
 			return($success);
 		}
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == session::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>

@@ -1,5 +1,7 @@
 <?php
 	class timestamp {
+		public static $className = __CLASS__;
+		
 		private $file;
 		
 		public function timestamp($file) { $this->file = $file; }
@@ -12,4 +14,8 @@
 			return($time);
 		}
 	}
+	
+	$path = pathinfo($_SERVER['SCRIPT_NAME']);
+	
+	if ($path['filename'] == timestamp::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
 ?>
