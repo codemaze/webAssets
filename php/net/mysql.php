@@ -1,5 +1,6 @@
 <?php
 	class mysql {
+		private $module = "MYSQL";
 		private $AFR;
 		private $charset;
 		private $connection;
@@ -83,8 +84,8 @@
 			} else $this->errors[] = $array['error'] = "No valid connection";
 			
 			if (is_a($this->logger, "logger")) {
-				if (!empty($array['error'])) $this->logger->msg("MySQL: ".$array['error'], LOGLEVEL_ERROR);
-				if ($array['resource'] && $log) $this->logger->msg("MySQL: ".$query, LOGLEVEL_INFO);
+				if (!empty($array['error'])) $this->logger->msg($array['error'], LOGLEVEL_ERROR, $this->module);
+				if ($array['resource'] && $log) $this->logger->msg($query, LOGLEVEL_INFO, $this->module);
 			}
 			
 			return($array);
