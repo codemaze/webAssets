@@ -76,5 +76,5 @@
 	
 	$path = pathinfo($_SERVER['SCRIPT_NAME']);
 	
-	if ($path['filename'] == toolbox::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
+	if ($path['filename'] == toolbox::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : toolbox::$className." © ".date("Y"));
 ?>

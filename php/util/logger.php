@@ -123,5 +123,5 @@
 	
 	$path = pathinfo($_SERVER['SCRIPT_NAME']);
 	
-	if ($path['filename'] == logger::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
+	if ($path['filename'] == logger::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : logger::$className." © ".date("Y"));
 ?>

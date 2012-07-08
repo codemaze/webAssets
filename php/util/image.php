@@ -78,5 +78,5 @@
 	
 	$path = pathinfo($_SERVER['SCRIPT_NAME']);
 	
-	if ($path['filename'] == image::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
+	if ($path['filename'] == image::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : image::$className." © ".date("Y"));
 ?>

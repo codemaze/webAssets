@@ -17,5 +17,5 @@
 	
 	$path = pathinfo($_SERVER['SCRIPT_NAME']);
 	
-	if ($path['filename'] == timestamp::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : $path['filename']." © ".date("Y"));
+	if ($path['filename'] == timestamp::$className) echo(($copyright = @file_get_contents("../../COPYRIGHT")) ? $copyright : timestamp::$className." © ".date("Y"));
 ?>
