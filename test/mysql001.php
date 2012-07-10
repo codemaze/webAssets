@@ -6,5 +6,5 @@
 	if ($mysql->connection()) echo("MySQL connection works!");
 	else echo("MySQL connection failed!");
 	
-	echo("Testing MySQL connection");
+	echo("<br /><br />Testing MySQL connection");
 ?>

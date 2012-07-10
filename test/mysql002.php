@@ -1,6 +1,6 @@
 <?php
-	include("../php/misc/timestamp.php");
-	include("../php/misc/toolbox.php");
+	include("../php/util/timestamp.php");
+	include("../php/util/toolbox.php");
 	include("../php/net/mysql.php");
 	
 	$code = toolbox::randStr(10);
